@@ -16,10 +16,12 @@ Import usblib project in CCS, check out include and library paths and build libr
 
 Your project should use driverlib and usblib as well. Include headers in your main c file:
 
+<code>
 #include "usbhserial.h"
 #include "usbhserialdriver.h"
 #include "usbhserialcdc.h"
 #include "usbhserialcp210x.h"
+</code>
 
 Declare the list of used drivers:
 
