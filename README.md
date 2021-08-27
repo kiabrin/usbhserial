@@ -23,7 +23,7 @@ Your project should use driverlib and usblib as well. Include headers in your ma
 
 Declare the list of used drivers:
 
-*tUSBSerialDriver g_psDrivers[] =
+tUSBSerialDriver g_psDrivers[] =
  {
   DECLARE_USB_SERIAL_CDC_DRIVER,
   DECLARE_USB_SERIAL_CP210X_DRIVER
@@ -32,7 +32,7 @@ uint8_t g_ui8NumDrivers = 2;
 
 Declare callback functions. First is global callback function receiving events for connected devices and system events:
 
-*uint32_t
+uint32_t
  CDCSerialGlobalCallback(void *pvCBData, uint32_t ui32Event,
                    uint32_t ui32MsgParam, void *pvMsgData)
  {
@@ -52,7 +52,7 @@ Declare callback functions. First is global callback function receiving events f
 
 Second is callback function for device instance events:
 
-*uint32_t
+uint32_t
  CDCSerialCallback(void *pvCBData, uint32_t ui32Event,
                    uint32_t ui32MsgParam, void *pvMsgData)
  {
@@ -85,6 +85,6 @@ Second is callback function for device instance events:
 
 In main function  initialize library with 
 
-*USBHostSerialInit(CDCSerialGlobalCallback);
+USBHostSerialInit(CDCSerialGlobalCallback);
 
 call, initialize USB controller and run main loop.
