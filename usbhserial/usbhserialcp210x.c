@@ -205,8 +205,22 @@ uint32_t USBHSerialCPGetControlLineState(tSerialInstance *psSerialInstance)
 
 uint32_t USBHSerialCPSetFlow(tSerialInstance *psSerialInstance, uint32_t ui32Flow)
 {
-    // TODO:
+    tUSBRequest sSetupPacket;
+    uint8_t pui8Bytes[0x10];
+    sSetupPacket.bRequest = CPCDC_SET_FLOW;
+    sSetupPacket.wValue = 0;
+    sSetupPacket.wIndex = 0;
+    sSetupPacket.wLength = 0x10;
+    sSetupPacket.bmRequestType = USB_RTYPE_DIR_OUT | USB_RTYPE_VENDOR |
+                                 USB_RTYPE_INTERFACE;
+    memset(pui8Bytes, 0, 0x10);
+    pui8Bytes[0] = (uint8_t)(ui32Flow & 0xFF);
+
+    USBHCDControlTransfer(0, &sSetupPacket, psSerialInstance->psDevice,
+                                 pui8Bytes, 0x10, MAX_PACKET_SIZE_EP0);
+
     return 0;
+
 }
 
 uint32_t USBHSerialCPBreakSet(tSerialInstance *psSerialInstance)
